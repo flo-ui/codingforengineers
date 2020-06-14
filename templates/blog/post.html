@@ -1,0 +1,43 @@
+{% extends 'base.html'%}
+{% load markdown_extras %}
+{% load static %}
+
+
+
+{% block content %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url({% static 'images/post-bg.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+            <h1>{{post.title}}</h1>
+            <h2 class="subheading">{{post.subtitle}}</h2>
+            <span class="meta"> {{post.date_updated|date}} by
+              <a href="#">{{post.author}}</a>
+              {% if date_created is not date_updated %}
+              <br> Latest update: {{post.date_updated|date}} 
+              {% endif %}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          
+          {{post.content|markdown|safe}}
+
+        </div>
+      </div>
+    </div>
+  </article>
+
+  
+  {% endblock content %}

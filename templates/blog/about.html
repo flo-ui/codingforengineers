@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+{% load static %}
+
+
+{% block content %}
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url({% static 'images/about-bg.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>About the blog and myself</h1>
+            <span class="subheading">A quick overview</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <h3>Hi, my name is Florian!</h3>
+        <p>Currently I am studying Mechanical Engineering at the Technical University Munich.</p>
+        <h5>This is my little Programming-blog</h5>
+        <p>As a side project I created this blog using the webframework <a href="https://www.djangoproject.com/">Django</a>. Therefore i used:</p>
+        <ul>
+          <li>Python as the programming language  <a href="https://www.djangoproject.com/">Django</a> is based on</li>
+          <li>A <a href="https://startbootstrap.com/themes/clean-blog/">Blog-Theme</a> based on <a href="https://getbootstrap.com/">Bootstrap 4</a> </li>
+          <li>Server-site Makdown rendering for the blog-posts</li>
+        </ul>
+        <p>As this page is a work in progress project, I am looking forward to add more content an features</p>
+        <p>I am happy to share the <a href="https://github.com/flo-ui/programmingforengineers">sourcecode</a> with You.</p>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
