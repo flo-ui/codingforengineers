@@ -14,7 +14,10 @@ import environ
 
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False)
+    DEBUG=(bool, False),
+    SECURE_SSL_REDIRECT=(bool,False),
+    SESSION_COOKIE_SECURE = (bool,False),
+    CSRF_COOKIE_SECURE = (bool,False)
 )
 environ.Env.read_env()
 
@@ -33,6 +36,11 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['codingforengineers.herokuapp.com', 'cfengineers-stage.herokuapp.com', '127.0.0.1']
 
+# For improved Security when deployed
+
+SECURE_SSL_REDIRECT = env('SECURE_SSL_REDIRECT')
+SESSION_COOKIE_SECURE = env('SESSION_COOKIE_SECURE')
+CSRF_COOKIE_SECURE = env('CSRF_COOKIE_SECURE')
 
 # Application definition
 

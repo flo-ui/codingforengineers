@@ -11,6 +11,8 @@ markdown = "*"
 gunicorn = "*"
 whitenoise = "*"
 django-environ = "*"
+pytest-django = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.8"
