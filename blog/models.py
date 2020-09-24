@@ -18,7 +18,7 @@ class BlogPost(models.Model):
     slug = models.SlugField(unique=True)
     content = models.TextField()
 
-    labels = models.ManyToManyField(BlogPostLabel)
+    labels = models.ManyToManyField(BlogPostLabel, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     views = models.PositiveIntegerField(default=0)
@@ -26,6 +26,7 @@ class BlogPost(models.Model):
     def __str__(self):
         return self.title
     
+    @property
     def snippet(self):
         return self.content[:50]
 

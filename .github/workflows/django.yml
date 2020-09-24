@@ -29,9 +29,9 @@ jobs:
         pip install pipenv
         pipenv lock -r > requirements.txt
         pip install -r requirements.txt
-    - name: Run Tests
+    - name: Run pytest
       run: |
-        python manage.py test
+        pytest
     - name: Deploy to Heroku
       env:
         HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
