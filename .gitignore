@@ -5,3 +5,4 @@ Pipfile.lock
 config/secret_settings.py
 config/.env
 .pytest_cache
+.coverage
