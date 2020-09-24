@@ -18,7 +18,8 @@ class TestUrls:
 
     @pytest.mark.django_db
     def test_post_detail_url(self):
+        label = mixer.blend('blog.BlogPostLabel')
         user = mixer.blend(User)
-        mixer.blend('blog.BlogPost', slug='best-blog', author=user, labels=None)
+        mixer.blend('blog.BlogPost', slug='best-blog', author=user, labels=[label])
         path = reverse('blog:post-detail', kwargs={'slug': 'best-blog'})
         assert resolve(path).view_name == 'blog:post-detail'
