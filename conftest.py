@@ -1,9 +1,10 @@
 import pytest
-import random
+from random import randint
 from mixer.backend.django import mixer
 from django.contrib.auth.models import User
 
 from blog.models import BlogPost, BlogPostLabel
+
 
 @pytest.fixture
 def lorem_post():
@@ -18,8 +19,16 @@ def lorem_post():
 
 @pytest.fixture
 def blog_content_random():
+    """ Creates 5 Posts with random authors and 1 to 5 labels"""
+
+    mixer.cycle(5).blend(User)
+    labels = mixer.cycle(5).blend('blog.BlogPostLabel')
     for i in range(5):
-        label = mixer.blend('blog.BlogPostLabel')
-        mixer.blend(User)
         post = mixer.blend('blog.BlogPost', author=mixer.SELECT)
-        post.labels.add(label)
+        add_new_label = 1
+        while add_new_label > 0:
+            try:
+                post.labels.add(labels[randint(0, 4)])
+            except:
+                pass
+            add_new_label = randint(0, 2)  # 1/3 chance to stop adding

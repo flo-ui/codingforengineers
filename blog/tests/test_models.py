@@ -25,9 +25,17 @@ class TestBlogPost:
         snippet = lorem_post.snippet(8, 2)
         assert snippet == "rem ip", 'post snippet method end- and start arg'
 
+    def test_post_str(self, lorem_post):
+        assert str(lorem_post) == lorem_post.title
+
+    def test_label_str(self):
+        label = mixer.blend('blog.BlogPostLabel')
+        assert str(label) == label.name
+
+
 @pytest.mark.django_db
 class TestBlogLabeling:
-    def test_blog_content(self, blog_content_random):
-        assert BlogPost.objects.all().count() == 5, 'validating random data from conftest'
-
+    def test_blog_content(self, blog_content_random): #test fixture
+        assert BlogPost.objects.all().count() == 5, 'validating number of generated blogposts'
+        assert BlogPost.objects.get(pk=2).labels.all().count() in range(1,5), 'validating the addition of labels'
 
