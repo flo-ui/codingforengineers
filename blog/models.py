@@ -26,8 +26,8 @@ class BlogPost(models.Model):
     def __str__(self):
         return self.title
     
-    @property
-    def snippet(self):
-        return self.content[:50]
+    def snippet(self, snip_end, snip_start=0):
+        """ get an excerpt of the posts content """
+        return self.content[snip_start:snip_end]
 
     
