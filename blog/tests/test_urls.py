@@ -3,6 +3,8 @@ from mixer.backend.django import mixer
 from django.contrib.auth.models import User
 from django.urls import reverse, resolve
 
+from blog.models import BlogPost,BlogPostLabel
+
 
 class TestUrls:
 
@@ -18,8 +20,7 @@ class TestUrls:
 
     @pytest.mark.django_db
     def test_post_detail_url(self):
-        label = mixer.blend('blog.BlogPostLabel')
         user = mixer.blend(User)
-        mixer.blend('blog.BlogPost', slug='best-blog', author=user, labels=[label])
+        post = mixer.blend(BlogPost, slug='best-blog', author_username="peter")
         path = reverse('blog:post-detail', kwargs={'slug': 'best-blog'})
         assert resolve(path).view_name == 'blog:post-detail'

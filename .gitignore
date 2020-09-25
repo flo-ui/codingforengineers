@@ -6,3 +6,4 @@ config/secret_settings.py
 config/.env
 .pytest_cache
 .coverage
+**.pyc
