@@ -15,6 +15,8 @@ markdown = "*"
 gunicorn = "*"
 whitenoise = "*"
 django-environ = "*"
+psycopg2 = "*"
+dj-database-url = "*"
 
 [requires]
 python_version = "3.8"
