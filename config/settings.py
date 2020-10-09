@@ -93,13 +93,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'cfengineers',
-        'USER': 'floui',
-        'PASSWORD': 'sp7a81z',
+        'USER': 'postgres',
+        'PASSWORD': 'abc',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
 
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
     
 
 
@@ -149,7 +152,3 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 MEDIA_ROOT= os.path.join(BASE_DIR, 'static')
-
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
