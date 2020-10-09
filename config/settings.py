@@ -32,7 +32,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env('SECRET_KEY', default='5yljr14wn6epx4+zpjj)ep@dungvkx7+nim!83)^b!p60#h8pv')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DJANGO_DEBUG')
+DEBUG = env('DJANGO_DEBUG', default=False)
 
 ALLOWED_HOSTS = ['codingforengineers.herokuapp.com', 'cfengineers-stage.herokuapp.com', '127.0.0.1']
 
