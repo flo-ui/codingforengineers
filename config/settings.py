@@ -14,10 +14,10 @@ import environ
 
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False),
-    SECURE_SSL_REDIRECT=(bool,False),
-    SESSION_COOKIE_SECURE = (bool,False),
-    CSRF_COOKIE_SECURE = (bool,False)
+    DJANG_DEBUG=(bool, False),
+    DJANGO_SECURE_SSL_REDIRECT=(bool,False),
+    DJANGO_SESSION_COOKIE_SECURE = (bool,False),
+    DJANGO_CSRF_COOKIE_SECURE = (bool,False)
 )
 environ.Env.read_env()
 
@@ -32,7 +32,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env('SECRET_KEY', default='5yljr14wn6epx4+zpjj)ep@dungvkx7+nim!83)^b!p60#h8pv')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = env('DJANGO_DEBUG')
 
 ALLOWED_HOSTS = ['codingforengineers.herokuapp.com', 'cfengineers-stage.herokuapp.com', '127.0.0.1']
 
@@ -154,6 +154,6 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool("DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS
 SECURE_HSTS_PRELOAD = env.bool("DJANGO_SECURE_HSTS_PRELOAD", default=True)
 SESSION_COOKIE_SECURE = env.bool("DJANGO_SESSION_COOKIE_SECURE", default=True)
 CSRF_COOKIE_SECURE = env.bool("DJANGO_CSRF_COOKIE_SECURE", default=True)
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') # new
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # new
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
