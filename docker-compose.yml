@@ -3,7 +3,7 @@ version: '3.8'
 services:
   web:
     build: .
-    command: gunicorn config.wsgi -b 0.0.0.0:8000 # new
+    command: python /code/manage.py runserver 0.0.0.0:8000 # gunicorn config.wsgi -b 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
@@ -20,7 +20,7 @@ services:
       - "DJANGO_SESSION_COOKIE_SECURE=False"
       - "DJANGO_CSRF_COOKIE_SECURE=False"
   db:
-    image: postgres:11
+    image: postgres:12
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:

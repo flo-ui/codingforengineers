@@ -34,7 +34,7 @@ SECRET_KEY = env('SECRET_KEY', default='5yljr14wn6epx4+zpjj)ep@dungvkx7+nim!83)^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DJANGO_DEBUG', default=False)
 
-ALLOWED_HOSTS = ['codingforengineers.herokuapp.com', 'cfengineers-stage.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['codingforengineers.herokuapp.com', 'cfengineers-stage.herokuapp.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -84,13 +84,20 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cfengineers',
+    #'default': {
+    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #    'NAME': 'cfengineers',
+    #    'USER': 'postgres',
+    #    'PASSWORD': 'abc',
+    #    'HOST': 'localhost',
+    #    'PORT': '5432',
+    #}
+        'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': 'abc',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'HOST': 'db', # set in docker-compose.yml
+        'PORT': 5432 # default postgres port
     }
 }
 
