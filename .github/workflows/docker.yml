@@ -1,0 +1,16 @@
+name: Docker Builds
+on: [push]
+
+jobs:
+    build: 
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: docker-build
+            run: |
+                docker-compose up -d --build
+        - name: ptest 
+            run: |
+            docker exec web pytest
+        - name: stop container
+            run: docker-compose down
