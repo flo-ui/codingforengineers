@@ -11,7 +11,7 @@ jobs:
           docker-compose up -d --build
       - name: ptest 
         run: |
-          docker exec web pytest
+          docker-compose exec web pytest
       - name: stop container
         run: |
           docker-compose down
