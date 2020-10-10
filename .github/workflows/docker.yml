@@ -9,9 +9,9 @@ jobs:
       - name: docker-build
         run: |
           docker-compose up -d --build
-      - name: ptest 
+      - name: pytest 
         run: |
-          docker-compose exec web pytest
+          docker-compose exec web pytest -t
       - name: stop container
         run: |
           docker-compose down
