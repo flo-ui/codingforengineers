@@ -1,5 +1,3 @@
-Pipfile.lock
-
 .vscode/settings.json
 .vscode
 config/secret_settings.py
