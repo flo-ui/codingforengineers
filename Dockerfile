@@ -1,6 +1,9 @@
 # Pull base image
 FROM python:3.8
 
+# author of file
+LABEL maintainer="Flo-ui <flo-ui@outlook.com>"
+
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
