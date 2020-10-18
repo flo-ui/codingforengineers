@@ -4,6 +4,7 @@ from .models import BlogPost
 
 # Register your models here.
 
+
 class BlogPostAdmin(admin.ModelAdmin):
     readonly_fields = ['slug', 'views']
 

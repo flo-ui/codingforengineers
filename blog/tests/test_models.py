@@ -24,7 +24,6 @@ class TestBlogPost:
     def test_post_snippet_start_end(self, lorem_post):
         snippet = lorem_post.snippet(8, 2)
         assert snippet == "rem ip", 'post snippet method end- and start arg'
-        
 
     def test_label_str(self, lorem_post):
         lorem_post.tags.add("lorem", "ipsum")

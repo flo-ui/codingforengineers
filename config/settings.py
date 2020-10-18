@@ -40,19 +40,17 @@ ALLOWED_HOSTS = [
 
 # Application definition
 
-INSTALLED_APPS = [ # fmt: off
+INSTALLED_APPS = [  # fmt: off
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-
     'blog.apps.BlogConfig',
     'accounts.apps.AccountsConfig',
     'taggit',
-] #fmt:on
+]  # fmt:on
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -183,5 +181,3 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 if not DEBUG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
