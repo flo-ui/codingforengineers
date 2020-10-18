@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponse
-from.models import BlogPost
+from .models import BlogPost
 
 # Create your views here.
 def index(request):
@@ -12,6 +12,7 @@ def index(request):
 
 def about(request):
     return render(request, 'blog/about.html')
+
 
 def contact(request):
     return render(request, 'blog/contact.html')

@@ -12,7 +12,7 @@ def lorem_post():
         'blog.BlogPost',
         author=mixer.blend(User),
         content="""Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, quod, eum fuga obcaecati 
-        eligendi doloremque sed ea dicta harum accusantium et, voluptas sint facere rem. Tempora pariatur commodi cum nobis."""
+        eligendi doloremque sed ea dicta harum accusantium et, voluptas sint facere rem. Tempora pariatur commodi cum nobis.""",
     )
     return post
 
@@ -29,4 +29,3 @@ def blog_content_random():
             post.tags.add("hello", "world", "its", "beautiful")
         except:
             pass
-            

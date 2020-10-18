@@ -7,13 +7,7 @@ from blog.models import BlogPost
 
 
 class TestUrls:
-
-    @pytest.mark.parametrize("view_name", [
-        "index",
-        "about",
-        "contact",
-        "post-list"
-    ])
+    @pytest.mark.parametrize("view_name", ["index", "about", "contact", "post-list"])
     def test_function_based_urls(self, view_name):
         path = reverse('blog:' + view_name)
         assert resolve(path).view_name == 'blog:' + view_name

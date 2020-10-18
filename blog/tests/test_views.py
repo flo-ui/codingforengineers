@@ -8,8 +8,8 @@ from django.contrib.auth.models import AnonymousUser
 
 pytestmark = pytest.mark.django_db
 
-class TestIndexView():
 
+class TestIndexView:
     def test_index_view_status_code(self):
         path = reverse_lazy('blog:index')
         request = RequestFactory().get('')

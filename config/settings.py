@@ -23,12 +23,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY', default='5yljr14wn6epx4+zpjj)ep@dungvkx7+nim!83)^b!p60#h8pv')
+SECRET_KEY = env(
+    'SECRET_KEY', default='5yljr14wn6epx4+zpjj)ep@dungvkx7+nim!83)^b!p60#h8pv'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DJANGO_DEBUG', default=False)
 
-ALLOWED_HOSTS = ['codingforengineers.herokuapp.com', 'cfengineers-stage.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = [
+    'codingforengineers.herokuapp.com',
+    'cfengineers-stage.herokuapp.com',
+    '127.0.0.1',
+    'localhost',
+]
 
 # Application definition
 
@@ -40,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
-
     'taggit',
 ]
 
@@ -87,11 +93,11 @@ if DOCKER_DB:
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'postgres',
             'USER': 'postgres',
-            'HOST': 'db', # set in docker-compose.yml
-            'PORT': 5432 # default postgres port
+            'HOST': 'db',  # set in docker-compose.yml
+            'PORT': 5432,  # default postgres port
         }
     }
-else: 
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -101,13 +107,12 @@ else:
             'HOST': 'localhost',
             'PORT': '5432',
         }
-
     }
 
 import dj_database_url
+
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
-    
 
 
 # Password validation
@@ -151,21 +156,21 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
-MEDIA_ROOT= os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
 
 # For improved Security when deployed
 
 SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
 SECURE_HSTS_SECONDS = env.int("DJANGO_SECURE_HSTS_SECONDS", default=2592000)
-SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool("DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS", default=True)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool(
+    "DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS", default=True
+)
 SECURE_HSTS_PRELOAD = env.bool("DJANGO_SECURE_HSTS_PRELOAD", default=True)
 SESSION_COOKIE_SECURE = env.bool("DJANGO_SESSION_COOKIE_SECURE", default=True)
 CSRF_COOKIE_SECURE = env.bool("DJANGO_CSRF_COOKIE_SECURE", default=True)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 TAGGIT_CASE_INSENSITIVE = True
