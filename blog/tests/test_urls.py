@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.urls import resolve, reverse
 
 import pytest
@@ -15,7 +15,7 @@ class TestUrls:
 
     @pytest.mark.django_db
     def test_post_detail_url(self):
-        user = mixer.blend(User)
+        user = mixer.blend(get_user_model())
         post = mixer.blend(BlogPost, slug='best-blog')
         path = reverse('blog:post-detail', kwargs={'slug': 'best-blog'})
         assert resolve(path).view_name == 'blog:post-detail'

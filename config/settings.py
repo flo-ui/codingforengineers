@@ -40,7 +40,7 @@ ALLOWED_HOSTS = [
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = [ # fmt: off
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'accounts.apps.AccountsConfig',
     'taggit',
-]
+] #fmt:on
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
