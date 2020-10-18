@@ -1,16 +1,9 @@
+from conftest import lorem_post
 import pytest
 from mixer.backend.django import mixer
 from django.contrib.auth.models import User
 
-from blog.models import BlogPost, BlogPostLabel
-
-@pytest.mark.django_db
-class TestBlogPostLabel:
-
-    def test_blog_post_label_creation(self):
-        label = mixer.blend('blog.BlogPostLabel')
-        assert label.pk == 1, 'Create Label instance'
-
+from blog.models import BlogPost
 
 @pytest.mark.django_db
 class TestBlogPost:
@@ -28,14 +21,13 @@ class TestBlogPost:
     def test_post_str(self, lorem_post):
         assert str(lorem_post) == lorem_post.title
 
-    def test_label_str(self):
-        label = mixer.blend('blog.BlogPostLabel')
-        assert str(label) == label.name
+    def test_label_str(self, lorem_post):
+        lorem_post.tags.add("lorem", "ipsum")
+        assert "lorem" in lorem_post.tags.slugs()
 
 
 @pytest.mark.django_db
 class TestBlogLabeling:
     def test_blog_content(self, blog_content_random): #test fixture
         assert BlogPost.objects.all().count() == 5, 'validating number of generated blogposts'
-        assert BlogPost.objects.get(pk=2).labels.all().count() in range(1,5), 'validating the addition of labels'
 

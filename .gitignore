@@ -5,3 +5,4 @@ config/.env
 .pytest_cache
 .coverage
 **.pyc
+htmlcov
