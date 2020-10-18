@@ -12,13 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import environ
 
-env = environ.Env(
-    # set casting, default value
-    DJANG_DEBUG=(bool, False),
-    DJANGO_SECURE_SSL_REDIRECT=(bool,False),
-    DJANGO_SESSION_COOKIE_SECURE = (bool,False),
-    DJANGO_CSRF_COOKIE_SECURE = (bool,False)
-)
+env = environ.Env()
 environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -47,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
 
-    'taggit'
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -85,23 +79,30 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    #'default': {
-    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #    'NAME': 'cfengineers',
-    #    'USER': 'postgres',
-    #    'PASSWORD': 'abc',
-    #    'HOST': 'localhost',
-    #    'PORT': '5432',
-    #}
+DOCKER_DB = env.bool("DJANGO_DOCKER_DB", default=True)
+
+if DOCKER_DB:
+    DATABASES = {
         'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'HOST': 'db', # set in docker-compose.yml
-        'PORT': 5432 # default postgres port
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'HOST': 'db', # set in docker-compose.yml
+            'PORT': 5432 # default postgres port
+        }
     }
-}
+else: 
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'cfengineers',
+            'USER': 'postgres',
+            'PASSWORD': 'abc',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+
+    }
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)

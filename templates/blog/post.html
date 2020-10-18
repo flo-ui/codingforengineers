@@ -6,14 +6,13 @@
 
 {% block content %}
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url({% static 'img/post-bg.jpg' %})">
+  <header class="masthead mb-2" style="background-image: url({% static 'img/rnd-bg.jpg' %})">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
             <h1>{{post.title}}</h1>
-            <h2 class="subheading">{{post.subtitle}}</h2>
             <span class="meta"> {{post.date_updated|date}} by
               <a href="#">{{post.author}}</a>
               {% if date_created is not date_updated %}
@@ -31,7 +30,13 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          
+          <div class="">
+            {% for tag_name in post.tags.names %}
+              <span class="badge badge-secondary">
+                {{ tag_name }}
+              </span>
+            {% endfor %}
+          </div>
           {{post.content|markdown|safe}}
 
         </div>
