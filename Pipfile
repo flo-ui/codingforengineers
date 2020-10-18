@@ -8,6 +8,8 @@ pytest-django = "*"
 pytest-cov = "*"
 mixer = "*"
 pytest = "*"
+flake8 = "*"
+isort = "*"
 
 [packages]
 django = "*"
@@ -19,6 +21,7 @@ psycopg2 = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
 django-taggit = "*"
+black = "*"
 
 [requires]
 python_version = "3.8"

@@ -1,7 +1,9 @@
-import pytest
 from random import randint
-from mixer.backend.django import mixer
+
 from django.contrib.auth.models import User
+
+import pytest
+from mixer.backend.django import mixer
 
 from blog.models import BlogPost
 

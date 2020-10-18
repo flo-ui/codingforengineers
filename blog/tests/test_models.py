@@ -1,9 +1,10 @@
-from conftest import lorem_post
-import pytest
-from mixer.backend.django import mixer
 from django.contrib.auth.models import User
 
+import pytest
+from mixer.backend.django import mixer
+
 from blog.models import BlogPost
+from conftest import lorem_post
 
 
 @pytest.mark.django_db

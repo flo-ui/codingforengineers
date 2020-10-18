@@ -1,7 +1,8 @@
+from django.contrib.auth.models import User
+from django.urls import resolve, reverse
+
 import pytest
 from mixer.backend.django import mixer
-from django.contrib.auth.models import User
-from django.urls import reverse, resolve
 
 from blog.models import BlogPost
 
