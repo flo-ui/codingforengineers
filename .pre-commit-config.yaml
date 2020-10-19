@@ -14,9 +14,8 @@ repos:
         name: black
         stages: [commit]
         language: system
-        entry: black . --exclude="migrations" --skip-string-normalization
+        entry: pipenv run black . --exclude="migrations" --skip-string-normalization
         exclude: migrations
-        args: [--skip-string-normalization]
         types: [python]
 
 

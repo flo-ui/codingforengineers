@@ -1,4 +1,7 @@
-from django.contrib.auth import get_user_model
+from os import name
+
+from django.core.exceptions import ValidationError
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 import pytest
 from mixer.backend.django import mixer
@@ -14,8 +17,19 @@ class TestBlogPost:
         assert str(lorem_post) == lorem_post.title
         assert lorem_post.slug == "lorem-ipsum-is-awesome"
 
-    def test_blog_post_file_upload_valid(self):
-        pass
+    def test_blog_post_file_upload_invalid(self, lorem_post):
+        """ run file validator with a filetype other than .md"""
+
+        mock_file = SimpleUploadedFile("will_fail.rmd", b"some text")
+        lorem_post.file = mock_file
+        with pytest.raises(ValidationError):
+            lorem_post.full_clean()  # calls all validators
+
+    def test_blog_post_file_upload_valid(self, lorem_post):
+        mock_file = SimpleUploadedFile("will_pass.md", b"# some important test")
+        lorem_post.file = mock_file
+        lorem_post.full_clean()
+        assert lorem_post.file.name == "will_pass.md"
 
     def test_post_snippet_end(self, lorem_post):
         snippet = lorem_post.snippet(8)

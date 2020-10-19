@@ -11,10 +11,10 @@ from .. import views
 pytestmark = pytest.mark.django_db
 
 
-#class TestIndexView:
-    #def test_index_view_status_code(self):
-    #    path = reverse_lazy('blog:index')
-    #    request = RequestFactory().get('')
-    #    request.user = AnonymousUser()
-    #    response = views.index(request)
-    #    assert response.status_code == 200, 'should be called by anyone'
+# class TestIndexView:
+# def test_index_view_status_code(self):
+#    path = reverse_lazy('blog:index')
+#    request = RequestFactory().get('')
+#    request.user = AnonymousUser()
+#    response = views.index(request)
+#    assert response.status_code == 200, 'should be called by anyone'
