@@ -1,10 +1,14 @@
+import pdb
+
 from django.contrib.auth import get_user_model
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import resolve, reverse
 
 import pytest
-from mixer.backend.django import mixer
 
 from blog.models import BlogPost
+
+from .factories import BlogPostFactory, SuperUserFactory
 
 
 class TestUrls:
@@ -15,7 +19,8 @@ class TestUrls:
 
     @pytest.mark.django_db
     def test_post_detail_url(self):
-        user = mixer.blend(get_user_model())
-        post = mixer.blend(BlogPost, slug='best-blog')
+        user = SuperUserFactory()
+
+        post = BlogPostFactory()
         path = reverse('blog:post-detail', kwargs={'slug': 'best-blog'})
         assert resolve(path).view_name == 'blog:post-detail'

@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -10,15 +11,16 @@ from .validators import validate_file_type
 
 
 class BlogPost(models.Model):
-    author = models.ForeignKey(
-        get_user_model(), default=1, null=True, on_delete=models.SET_NULL
-    )
-    title = models.CharField(max_length=100)
+
+    author = models.ForeignKey(get_user_model(), default=1, null=True, on_delete=models.SET_NULL)
+    title = models.CharField(max_length=100, blank=True, null=True)
     subtitle = models.CharField(max_length=150, blank=True, null=True)
     slug = models.SlugField(unique=True)
-    content = models.TextField()
+    content = models.TextField(blank=True, null=True)
     file = models.FileField(
-        upload_to='uploads/', validators=[validate_file_type], blank=True, null=True
+        blank=True,
+        upload_to='uploads/',
+        validators=[validate_file_type],
     )
 
     tags = TaggableManager(blank=True)
@@ -29,9 +31,25 @@ class BlogPost(models.Model):
     def __str__(self):
         return self.title
 
+    def clean(self):
+        if self.title is None and self.content is None and self.file is None:
+            raise ValidationError("You need to specify to specify title and content ot file")
+
+        if self.title and self.content and self.file:
+            raise ValidationError("You cannot specify a file and title+content")
+
+        if (self.title and self.content == None) or (self.title == None and self.content):
+            raise ValidationError(" Title and content must both be filled or empty")
+
     def save(self, *args, **kwargs):
+        if self.file.name:
+            with open(self.file.url) as f:
+                file_content = f.read().split("\n\n", 1)
+            self.title = file_content[0].replace("# ", "")
+            self.content = file_content[1]
         if not self.slug:
             self.slug = slugify(self.title)
+
         return super().save(*args, **kwargs)
 
     def snippet(self, snip_end, snip_start=0):

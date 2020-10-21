@@ -24,9 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env(
-    'SECRET_KEY', default='5yljr14wn6epx4+zpjj)ep@dungvkx7+nim!83)^b!p60#h8pv'
-)
+SECRET_KEY = env('SECRET_KEY', default='5yljr14wn6epx4+zpjj)ep@dungvkx7+nim!83)^b!p60#h8pv')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DJANGO_DEBUG', default=False)
@@ -50,6 +48,7 @@ INSTALLED_APPS = [  # fmt: off
     'blog.apps.BlogConfig',
     'accounts.apps.AccountsConfig',
     'taggit',
+    'django_cleanup.apps.CleanupConfig',
 ]  # fmt:on
 
 MIDDLEWARE = [
@@ -89,27 +88,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DOCKER_DB = env.bool("DJANGO_DOCKER_DB", default=True)
 
-if DOCKER_DB:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'postgres',
-            'USER': 'postgres',
-            'HOST': 'db',  # set in docker-compose.yml
-            'PORT': 5432,  # default postgres port
-        }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',  # set in docker-compose.yml
+        'PORT': 5432,  # default postgres port
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'cfengineers',
-            'USER': 'postgres',
-            'PASSWORD': 'abc',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
+}
 
 import dj_database_url
 
@@ -171,9 +159,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
 SECURE_HSTS_SECONDS = env.int("DJANGO_SECURE_HSTS_SECONDS", default=2592000)
-SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool(
-    "DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS", default=True
-)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool("DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS", default=True)
 SECURE_HSTS_PRELOAD = env.bool("DJANGO_SECURE_HSTS_PRELOAD", default=True)
 SESSION_COOKIE_SECURE = env.bool("DJANGO_SESSION_COOKIE_SECURE", default=True)
 CSRF_COOKIE_SECURE = env.bool("DJANGO_CSRF_COOKIE_SECURE", default=True)

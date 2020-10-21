@@ -9,14 +9,11 @@ repos:
         stages: [commit]
         language: system
         entry: isort . 
-
+  - repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
       - id: black
-        name: black
-        stages: [commit]
-        language: system
-        entry: pipenv run black . --exclude="migrations" --skip-string-normalization
-        exclude: migrations
-        types: [python]
+        args: [ --force-exclude=/migrations/, --skip-string-normalization, --line-length=119, -v]
 
 
 
