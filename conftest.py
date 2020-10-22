@@ -24,6 +24,7 @@ def file_test():
         pass
 """
 
+
 @pytest.fixture
 def lorem_post():
     post = BlogPost.objects.create(

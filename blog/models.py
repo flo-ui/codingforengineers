@@ -12,9 +12,7 @@ from .validators import validate_file_type
 
 class BlogPost(models.Model):
 
-    author = models.ForeignKey(
-        get_user_model(), default=1, null=True, on_delete=models.SET_NULL
-    )
+    author = models.ForeignKey(get_user_model(), default=1, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=100, blank=True, null=True)
     subtitle = models.CharField(max_length=150, blank=True, null=True)
     slug = models.SlugField(unique=True)
@@ -35,9 +33,7 @@ class BlogPost(models.Model):
 
     def clean(self):
         if not ((self.title and self.content) or self.file):
-            raise ValidationError(
-                "You need to specify to specify title and content ot file"
-            )
+            raise ValidationError("You need to specify to specify title and content ot file")
 
         # if self.title and self.content and self.file:
         #    raise ValidationError("You cannot specify a file and title+content")

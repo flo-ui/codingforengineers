@@ -36,11 +36,9 @@ class TestBlogPost:
     def test_post_invalid_no_data(self):
         """ No data is passed into the model-admin """
         with pytest.raises(ValidationError):
-            post = BlogPost.objects.create(
-                author = SuperUserFactory()
-            )
+            post = BlogPost.objects.create(author=SuperUserFactory())
             post.full_clean()
-            
+
     def test_post_file_upload_invalid_file(self, lorem_post):
         """ run file validator with a filetype other than .md"""
 
@@ -73,9 +71,7 @@ class TestBlogPost:
     def test_post_save(self):
         file = SimpleUploadedFile('content.md', b"# Test 1\n\n* list item 1")
         post = BlogPost.objects.create(
-            author=get_user_model().objects.create(
-                username="petermueller", password="ilmerkel"
-            ),
+            author=get_user_model().objects.create(username="petermueller", password="ilmerkel"),
             file=file,
         )
         assert post.file.name == "uploads/content.md"
