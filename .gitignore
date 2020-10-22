@@ -7,3 +7,4 @@ config/.env
 **.pyc
 htmlcov
 geckodriver.log
+**/media/**
