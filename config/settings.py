@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DOCKER_DB = env.bool("DJANGO_DOCKER_DB", default=True)
 
-if DOCKER_DB:
+"""if DOCKER_DB:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -99,17 +99,18 @@ if DOCKER_DB:
             'PORT': 5432,  # default postgres port
         }
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'cfengineers',
-            'USER': 'postgres',
-            'PASSWORD': 'abc',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
+else:"""
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'cfengineers',
+        'USER': 'engineer',
+        'PASSWORD': 'ilengineering',
+        'HOST': 'localhost',
+        'PORT': '',
     }
+}
 
 import dj_database_url
 
