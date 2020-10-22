@@ -22,15 +22,18 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
+        
         {% for post in index_posts %}
         <div class="post-preview">
           <a href="{% url 'blog:post-detail' post.slug %}">
             <h2 class="post-title">
               {{post.title}}
             </h2>
-            <h3 class="post-subtitle">
-              {{post.subtitle}}
-            </h3>
+            {% if post.subtitle %}
+              <h3 class="post-subtitle">
+                {{post.subtitle}}
+              </h3>
+            {% endif %}
           </a>
           <p class="post-meta">Posted by
             <a href="#">{{post.author}}</a>
@@ -40,9 +43,11 @@
         {% endfor %}
     
         <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-        </div>
+        {% if index_posts.count > 0 %}
+          <div class="clearfix">
+            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>
