@@ -11,7 +11,7 @@ from blog.models import BlogPost
 
 TEST_DIR = "test_data"
 
-
+""" Can be reimplemented with refactoring
 @pytest.fixture
 @override_settings(MEDIA_ROOT=(TEST_DIR + '/media'))
 def file_test():
@@ -22,7 +22,7 @@ def file_test():
         shutil.rmtree(TEST_DIR)
     except OSError:
         pass
-
+"""
 
 @pytest.fixture
 def lorem_post():
@@ -35,18 +35,3 @@ def lorem_post():
         file=None,
     )
     return post
-
-
-@pytest.fixture
-def blog_content_random():
-    """ Creates 5 Posts with random authors and 1 to 5 labels"""
-
-    mixer.cycle(5).blend(get_user_model())
-    for i in range(5):
-        post = BlogPost.objects.create(
-            title=f"Hello World{i}",
-            slug=slugify(f"Hello World{i}"),
-            content="This is a random content",
-            author=get_user_model().objects.get(pk=i),
-        )
-        post.tags.add("hello", "world", "its", "beautiful")
