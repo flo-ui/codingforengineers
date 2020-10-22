@@ -20,8 +20,10 @@ django-environ = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
 django-taggit = "*"
-black = "*"
+black = "20.8b1"
 psycopg2 = "*"
+django-cleanup = "*"
+factory-boy = "*"
 
 [requires]
 python_version = "3.8"

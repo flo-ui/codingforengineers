@@ -12,7 +12,9 @@ from .validators import validate_file_type
 
 class BlogPost(models.Model):
 
-    author = models.ForeignKey(get_user_model(), default=1, null=True, on_delete=models.SET_NULL)
+    author = models.ForeignKey(
+        get_user_model(), default=1, null=True, on_delete=models.SET_NULL
+    )
     title = models.CharField(max_length=100, blank=True, null=True)
     subtitle = models.CharField(max_length=150, blank=True, null=True)
     slug = models.SlugField(unique=True)
@@ -32,19 +34,20 @@ class BlogPost(models.Model):
         return self.title
 
     def clean(self):
-        if self.title is None and self.content is None and self.file is None:
-            raise ValidationError("You need to specify to specify title and content ot file")
+        if not ((self.title and self.content) or self.file):
+            raise ValidationError(
+                "You need to specify to specify title and content ot file"
+            )
 
-        if self.title and self.content and self.file:
-            raise ValidationError("You cannot specify a file and title+content")
+        # if self.title and self.content and self.file:
+        #    raise ValidationError("You cannot specify a file and title+content")
 
-        if (self.title and self.content == None) or (self.title == None and self.content):
-            raise ValidationError(" Title and content must both be filled or empty")
+        # if (self.title and self.content == None) or (self.title == None and self.content):
+        #    raise ValidationError(" Title and content must both be filled or empty")
 
     def save(self, *args, **kwargs):
-        if self.file.name:
-            with open(self.file.url) as f:
-                file_content = f.read().split("\n\n", 1)
+        if self.file:
+            file_content = self.file.read().decode('utf-8').split("\n\n", 1)
             self.title = file_content[0].replace("# ", "")
             self.content = file_content[1]
         if not self.slug:
