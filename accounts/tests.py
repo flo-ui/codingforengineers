@@ -9,8 +9,6 @@ import pytest
 @pytest.mark.django_db
 def test_create_superuser():
     User = get_user_model()
-    user = User.objects.create_superuser(
-        username='superadmin', email='superadmin@email.com', password='testpass123'
-    )
+    user = User.objects.create_superuser(username='superadmin', email='superadmin@email.com', password='testpass123')
 
     assert str(user) == "superadmin"
