@@ -22,13 +22,13 @@ def about(request):
 def contact(request):
     print(settings.EMAIL_HOST_USER)
     if request.method == 'POST':
-        #send_mail(
-        #    request.POST["subject"], # Subject
-        #    request.POST["sender_name"]+ ", "+ request.POST["sender_email"]+": \n\n"+ request.POST["message"], # Content
-        #    settings.EMAIL_HOST_USER, # From
-        #    [settings.EMAIL_RECIEVER], # To
-        #    fail_silently=False,
-        #)
+        send_mail(
+            request.POST["subject"], # Subject
+            request.POST["sender_name"]+ ", "+ request.POST["sender_email"]+": \n\n"+ request.POST["message"], # Content
+            settings.EMAIL_HOST_USER, # From
+            [settings.EMAIL_RECIEVER], # To
+            fail_silently=False,
+        )
         messages.success(request, 'Email was successfully sent')
         return redirect(reverse('blog:index'))
     return render(request, 'blog/contact.html')
