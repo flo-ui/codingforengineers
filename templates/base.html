@@ -9,10 +9,10 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>CodingForEngineers</title>
+  <title>Coding for Engineers</title>
 
   <link rel="shortcut icon" href="{% static 'img/cfe-favicon.png' %}" type="image/x-icon">
-  
+
   <!-- Bootstrap core CSS -->
   <link href="{% static 'css/vendor/bootstrap.min.css' %}" rel="stylesheet">
 
@@ -56,6 +56,19 @@
         </div>
       </div>
     </nav>
+    {% if messages %}
+    <div class="container">
+      <div class="" style="margin-top: 55px;">
+        {% for message in messages %}
+        <div class=" alert alert-{{ message.tags }} alert-dismissible mb-0" role="alert">{{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
     {% block content %}
 
     {% endblock content %}
@@ -75,10 +88,10 @@
                 </a>
                 </li>
                 <li class="list-inline-item">
-                <a href="#">
+                <a href="https://flo-ui.github.io">
                     <span class="fa-stack fa-lg">
                     <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                    <i class="fas fa-desktop fa-stack-1x fa-inverse"></i>
                     </span>
                 </a>
                 </li>
@@ -95,7 +108,7 @@
               <script type="text/javascript">
                 document.write(new Date().getFullYear());
               </script> 
-              flo-ui</p>
+              flo-ui
             </div>
         </div>
         </div>
