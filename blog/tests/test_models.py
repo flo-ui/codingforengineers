@@ -73,6 +73,7 @@ class TestBlogPost:
         post = BlogPost.objects.create(
             author=get_user_model().objects.create(username="petermueller", password="ilmerkel"),
             file=file,
+            is_from_file = True,
         )
         assert post.file.name == "uploads/content.md"
         assert post.title == "Test 1"

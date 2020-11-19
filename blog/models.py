@@ -27,6 +27,7 @@ class BlogPost(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     views = models.PositiveIntegerField(default=0)
+    is_from_file = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -42,7 +43,7 @@ class BlogPost(models.Model):
         #    raise ValidationError(" Title and content must both be filled or empty")
 
     def save(self, *args, **kwargs):
-        if self.file:
+        if self.file and self.is_from_file == True:
             file_content = self.file.read().decode('utf-8').split("\n\n", 1)
             self.title = file_content[0].replace("# ", "")
             self.content = file_content[1]
