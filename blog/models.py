@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.template.defaultfilters import slugify
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from taggit.managers import TaggableManager
 
 from .validators import validate_file_type
@@ -33,7 +33,7 @@ class BlogPost(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("post-detail", kwargs={"pk": self.slug})
+        return reverse("blog:post-detail", kwargs={"slug": self.slug})
     
 
     def clean(self):
