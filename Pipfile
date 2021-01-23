@@ -25,6 +25,7 @@ psycopg2-binary = "*"
 django-taggit = "*"
 psycopg2 = "*"
 django-cleanup = "*"
+martor = "*"
 
 [requires]
 python_version = "3.8.6"

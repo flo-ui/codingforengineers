@@ -5,6 +5,7 @@ from django.template.defaultfilters import slugify
 from django.urls import reverse, reverse_lazy
 from taggit.managers import TaggableManager
 
+from martor.models import MartorField
 from .validators import validate_file_type
 
 # Create your models here.
@@ -16,7 +17,7 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True)
     subtitle = models.CharField(max_length=150, blank=True, null=True)
     slug = models.SlugField(unique=True)
-    content = models.TextField(blank=True, null=True)
+    content = MartorField(blank=True, null=True)
     file = models.FileField(
         blank=True,
         upload_to='uploads/',

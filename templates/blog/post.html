@@ -1,5 +1,6 @@
 {% extends 'base.html'%}
 {% load markdown_extras %}
+{% load martortags %}
 {% load static %}
 
 
@@ -64,12 +65,11 @@
             {% endfor %}
           </div>
 
-          {{ post.content|markdown|safe }}
+          {{ post.content|safe_markdown }}
 
         </div>
       </div>
     </div>
   </article>
 
-  
   {% endblock content %}

@@ -21,6 +21,7 @@ from django.urls import include, path
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     path('', include('blog.urls')),
+    path('martor/', include('martor.urls')),
 ]
 
 if settings.DEBUG:  # pragma: no cover

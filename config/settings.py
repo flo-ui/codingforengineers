@@ -48,6 +48,7 @@ INSTALLED_APPS = [  # fmt: off
     'blog.apps.BlogConfig',
     'accounts.apps.AccountsConfig',
     'taggit',
+    'martor',
     'django_cleanup.apps.CleanupConfig',
 ]  # fmt:on
 
@@ -190,3 +191,15 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # if not DEBUG:
 #    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MARTOR_ENABLE_CONFIGS = {
+    'mention': 'true',   # to enable/disable mention
+    'jquery': 'true',    # to include/revoke jquery (require for admin default django)
+}
+
+MARTOR_TOOLBAR_BUTTONS = [
+    'bold', 'italic', 'horizontal', 'heading', 'pre-code',
+    'blockquote', 'unordered-list', 'ordered-list',
+    'link', 'image-link',
+    'direct-mention', 'toggle-maximize',
+]
