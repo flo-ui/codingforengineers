@@ -2,6 +2,8 @@
 .vscode
 config/secret_settings.py
 config/.env
+.env
+.venv
 .pytest_cache
 .coverage
 **.pyc

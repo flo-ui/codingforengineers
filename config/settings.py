@@ -101,21 +101,14 @@ DOCKER_DB = env.bool("DJANGO_DOCKER_DB", default=True)
     }
 else:"""
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cfengineers',
-        'USER': 'engineer',
-        'PASSWORD': 'ilengineering',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
-
 import dj_database_url
 
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+DATABASES = {
+    'default': dj_database_url.config(
+        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
+        conn_max_age=600,
+    )
+}
 
 
 # Password validation
